@@ -46,15 +46,15 @@ class NetworkBot:
         self.retry_delay = retry_delay
         self.config_file = config_file
 
+        # Set up logging first (required by other methods)
+        self.setup_logging()
+
         # Load configuration
         self.config = self._load_config()
 
         # Set script path and validate
         self.script_path = os.path.join(os.path.dirname(__file__), "network_config.sh")
         self._validate_script_path()
-
-        # Set up logging
-        self.setup_logging()
 
         # Set up signal handlers
         signal.signal(signal.SIGINT, self._signal_handler)
